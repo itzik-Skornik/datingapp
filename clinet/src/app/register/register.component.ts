@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { AccountService } from './../_services/account.service';
 import { Component, Input, Output, EventEmitter ,OnInit} from '@angular/core';
 
@@ -10,7 +11,7 @@ export class RegisterComponent implements OnInit {
   
 @Output() cancolRegister = new EventEmitter();
 model :any={};
-constructor(private AccountService: AccountService){
+constructor(private AccountService: AccountService, private toastr : ToastrService){
 
 }
 ngOnInit(): void {
@@ -23,7 +24,11 @@ register(){
     this.cancol();
     
   },
-  error: err => console.log(err)
+  error: err => {
+    this.toastr.error(err.error),
+    console.log(err);
+    
+  }
   
   
  })
